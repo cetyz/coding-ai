@@ -1,7 +1,7 @@
 # AI Coding Assistant
  
-An OpenAI-powered assistant that will get actual code from your github repository.
-Then ask it questions and it will help you.
+An OpenAI-powered assistant that will read actual code from your github repository.
+You can ask the assistant questions and it will be able to help you.
 
 ## Benefits
 - No need to copy and paste snippets of your code since the assistant is able to retrieve your actual code
