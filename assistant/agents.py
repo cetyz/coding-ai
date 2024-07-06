@@ -112,13 +112,15 @@ if __name__ == '__main__':
     github_cleaner_agent = GithubCleanerAgent()
     github_data = github_cleaner_agent.invoke(repo_data)
     
-    github_assistant_agent = GithubAssistantAgent(github_data=github_data)
+    print(github_data)
+
+    # github_assistant_agent = GithubAssistantAgent(github_data=github_data)
 
 
-    while True:
-        user_input = input('User Message: ')
-        if user_input == 'exit':
-            break
-        response = github_assistant_agent.invoke(user_input)
-        print('Assistant:', response)
-        print()
+    # while True:
+    #     user_input = input('User Message: ')
+    #     if user_input == 'exit':
+    #         break
+    #     response = github_assistant_agent.invoke(user_input)
+    #     print('Assistant:', response)
+    #     print()

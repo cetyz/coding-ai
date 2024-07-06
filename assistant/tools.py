@@ -1,5 +1,6 @@
 import requests
 from typing import Dict, Any
+import mimetypes
 
 def fetch_github_repo(repo_url: str) -> Dict[str, Any]:
     """
@@ -22,8 +23,12 @@ def fetch_github_repo(repo_url: str) -> Dict[str, Any]:
         for item in contents:
             item_path = f"{path}/{item['name']}" if path else item['name']
             if item['type'] == 'file':
-                file_content = requests.get(item['download_url']).text
-                files[item_path] = file_content
+                mime_type, _ = mimetypes.guess_type(item['download_url'])
+                if mime_type and (mime_type.startswith('image/') or mime_type.startswith('audio/') or mime_type.startswith('video/')):
+                    files[item_path] = 'Binary file'
+                else:
+                    file_content = requests.get(item['download_url']).text
+                    files[item_path] = file_content
             elif item['type'] == 'dir':
                 dir_contents = get_contents(item['url'])
                 files.update(fetch_files(dir_contents, item_path))
@@ -46,3 +51,8 @@ def fetch_github_repo(repo_url: str) -> Dict[str, Any]:
 tool_dict = {
     'fetch_github_repo': fetch_github_repo
 }
+
+if __name__ == '__main__':
+    url = 'https://github.com/cetyz/coding-ai'
+    response = fetch_github_repo(url)
+    print(response)
