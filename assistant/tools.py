@@ -32,5 +32,10 @@ def fetch_github_repo(repo_url: str) -> Dict[str, Any]:
     contents = get_contents(api_url)
     repo_files = fetch_files(contents)
 
+    repo_files.pop('.gitattributes')
+    repo_files.pop('.gitignore')
+
+    
+
     # Returning the collected data in JSON format
     return repo_files
