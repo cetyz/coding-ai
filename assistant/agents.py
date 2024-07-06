@@ -108,9 +108,10 @@ class GithubAssistantAgent(Agent):
 if __name__ == '__main__':
     from tools import fetch_github_repo
     repo_data = fetch_github_repo('https://github.com/cetyz/coding-ai')
+    repo_data_str = str(repo_data)
 
     github_cleaner_agent = GithubCleanerAgent()
-    github_data = github_cleaner_agent.invoke(repo_data)
+    github_data = github_cleaner_agent.invoke(repo_data_str)
     
     print(github_data)
 
