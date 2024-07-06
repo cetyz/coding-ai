@@ -42,13 +42,6 @@ def fetch_github_repo(repo_url: str) -> Dict[str, Any]:
         if f in repo_files.keys():
             repo_files.pop(f)
 
-    # if '.gitattributes' in repo_files.keys():
-    #     repo_files.pop('.gitattributes')
-    # if '.gitignore' in repo_files.keys():
-    #     repo_files.pop('.gitignore')
-
-    
-
     # Returning the collected data in JSON STRING format
     return repo_files
 
@@ -60,5 +53,7 @@ tool_dict = {
 if __name__ == '__main__':
     url = 'https://github.com/cetyz/coding-ai'
     response = fetch_github_repo(url)
-    for k in response.keys():
+    for k, v in response.items():
         print(k)
+        print(v)
+        print()
