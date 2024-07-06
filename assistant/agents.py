@@ -86,9 +86,7 @@ class Agent:
 
         if chat_response.choices[0].finish_reason == 'stop':
             chat_response_message = chat_response.choices[0].message.content
-            self.memory.append(
-                {'role': 'assistant', 'content': chat_response_message}
-            )
+            self.append_to_memory({'role': 'assistant', 'content': chat_response_message})
             return chat_response_message
 
         elif chat_response.choices[0].finish_reason == 'tool_calls':
@@ -109,15 +107,16 @@ class GithubAssistantAgent(Agent):
 
 if __name__ == '__main__':
     from tools import fetch_github_repo
-    repo_data = fetch_github_repo('https://github.com/cetyz/hello-world')
+    repo_data = fetch_github_repo('https://github.com/cetyz/coding-ai')
 
     github_cleaner_agent = GithubCleanerAgent()
     github_data = github_cleaner_agent.invoke(repo_data)
     
     github_assistant_agent = GithubAssistantAgent(github_data=github_data)
 
+
     while True:
-        user_input = input('User Message:')
+        user_input = input('User Message: ')
         if user_input == 'exit':
             break
         response = github_assistant_agent.invoke(user_input)
